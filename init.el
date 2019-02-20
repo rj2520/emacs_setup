@@ -13,7 +13,7 @@
  '(custom-enabled-themes (quote (light-blue)))
  '(package-selected-packages
    (quote
-    (swiper tabbar org-bullets yasnippet-snippets iedit auto-complete-c-headers))))
+    (flycheck swiper tabbar org-bullets yasnippet-snippets iedit auto-complete-c-headers))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -29,7 +29,6 @@
 	     '("melpa" . "https://melpa.org/packages/"))
 
 (package-initialize)
-
 (require 'auto-complete)
 (require 'auto-complete-config)
 (ac-config-default)
@@ -61,14 +60,11 @@
 (setq ido-everywhere t)
 (ido-mode 1)
 
-(defalias 'list-buffers 'ibuffer-other-window)
-
-(use-package tabbar
+(use-package flycheck
   :ensure t
-  :config
-  (tabbar-mode 1))
+  :init
+  (global-flycheck-mode t))
 
-;;swiper for searching
 (use-package swiper
   :ensure t
   :config
@@ -79,7 +75,6 @@
     (global-set-key "\C-s" 'swiper)
     (global-set-key (kbd "C-c C-r") 'ivy-resume)
     (global-set-key (kbd "<f6>") 'ivy-resume)
-    (global-set-key (kbd "M-x") 'counsel-M-x)
     (global-set-key (kbd "C-x C-f") 'counsel-find-file)
     (global-set-key (kbd "<f1> f") 'counsel-describe-function)
     (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
@@ -91,5 +86,4 @@
     (global-set-key (kbd "C-c k") 'counsel-ag)
     (global-set-key (kbd "C-x l") 'counsel-locate)
     (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
-    (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
-    ))
+    (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)))
